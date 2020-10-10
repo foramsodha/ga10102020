@@ -1,0 +1,4 @@
+data_path:
+    train_data : D:/gatutorial/data/train
+    test_data : D:/gatutorial/data/test
+sentence_num : 3    
