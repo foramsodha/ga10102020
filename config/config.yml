@@ -1,4 +1,4 @@
 data_path:
-    train_data : D:/gatutorial/data/train
+    train_data : D:/gatutorial/data/train/article1.txt
     test_data : D:/gatutorial/data/test
 sentence_num : 3    

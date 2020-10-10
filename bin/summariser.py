@@ -4,26 +4,50 @@ Created on Sun Oct  4 23:28:31 2020
 
 @author: User
 """
+import yaml
+import numpy as np
+
 class Summariser:
     
-    def loadDocs():
-        pass
+    def __init(self)__:
+        with open('../config/config.yml','r') as fl:
+            self.config=yaml.load(fl)
+        
+    def loadDocs(self,filePath):
+        with open(filePath,'r') as fl:
+            text=fl.read()
+        return text    
+        
+    def splitSentences(self,text):
+        sentences=text.split('.')
+        return sentences
     
-    def loadConfig():
-        pass
+    def groupSentences(self,sentences):
+        firstSent,restOfSent=sentences[0],sentences[1:]
+        return firstSent,restOfSent
+ 
+    def findSentenceLength(self,text):
+        return text.split()
     
-    def splitter():
-        pass
+    def findSentLengthArray(self, sentences):
+        return [self.findSentenceLength(sent) for sent in sentences]
     
-    def firstSentExtractor():
-        pass
+    def findTopSentences(self,sentLengths,sentences):
+        sortedIdx=np.argsort(sentLengths)
+        top3Idx=sortedIdx[-3:]
+        top3Sentences=[sentences[i] for i in top3Indx]
+        return top3Sentences
     
-    def findNumWords():
-        pass
-    
-    def findTop3Sent():
-        pass
-    
-    def sentenceCombiner():
-        pass    
-    
+   def findSummary(self):
+       filePath=self.config['data_path']['train_data']
+       text = self.loadDocs(filePath)
+       sentences=self.splitSentences(text)
+       firstSent,restOfSent=self.groupSentences(sentences)
+       sentLengths=self.findSentLengthArray(restOfSent)
+       topSentences=self.findTopSentences(sentLengths,restOfSent)
+       allSentences=[firstSent] + topSentences
+       summary = ' '.join(allSentences)
+       return summary
+       
+ summariserObj=Summariser()   
+ summariserObj.loadConfig()
