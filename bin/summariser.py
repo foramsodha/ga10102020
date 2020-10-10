@@ -49,5 +49,4 @@ class Summariser:
         summary = ' '.join(allSentences)
         return summary
        
- summariserObj=Summariser()   
- summariserObj.loadConfig()
+summariserObj=Summariser()   
