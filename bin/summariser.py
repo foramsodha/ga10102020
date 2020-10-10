@@ -9,7 +9,7 @@ import numpy as np
 
 class Summariser:
     
-    def __init(self)__:
+    def __init__(self):
         with open('../config/config.yml','r') as fl:
             self.config=yaml.load(fl)
         
@@ -38,16 +38,16 @@ class Summariser:
         top3Sentences=[sentences[i] for i in top3Indx]
         return top3Sentences
     
-   def findSummary(self):
-       filePath=self.config['data_path']['train_data']
-       text = self.loadDocs(filePath)
-       sentences=self.splitSentences(text)
-       firstSent,restOfSent=self.groupSentences(sentences)
-       sentLengths=self.findSentLengthArray(restOfSent)
-       topSentences=self.findTopSentences(sentLengths,restOfSent)
-       allSentences=[firstSent] + topSentences
-       summary = ' '.join(allSentences)
-       return summary
+    def findSummary(self):
+        filePath=self.config['data_path']['train_data']
+        text = self.loadDocs(filePath)
+        sentences=self.splitSentences(text)
+        firstSent,restOfSent=self.groupSentences(sentences)
+        sentLengths=self.findSentLengthArray(restOfSent)
+        topSentences=self.findTopSentences(sentLengths,restOfSent)
+        allSentences=[firstSent] + topSentences
+        summary = ' '.join(allSentences)
+        return summary
        
  summariserObj=Summariser()   
  summariserObj.loadConfig()
