@@ -6,6 +6,7 @@ Created on Sun Oct  4 23:27:02 2020
 """
 
 import re
+
 class PreprocessDoc:
     
     """
@@ -21,11 +22,9 @@ class PreprocessDoc:
         Output:
             modifiedText:string
         """
-        pass
-    
-    def tokenizeArticle():
-        pass
-    
-    def stopwordRemoval():
-        pass
+        filteredText=re.sub(',|;|#|$','',text)
+        return filteredText
+        
+    def convertToLower(self,text):
+        return text.lower()
         

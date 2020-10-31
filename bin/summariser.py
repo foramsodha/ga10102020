@@ -6,6 +6,7 @@ Created on Sun Oct  4 23:28:31 2020
 """
 import yaml
 import numpy as np
+from preprocessor import PreprocessDoc
 
 class Summariser:
     
@@ -35,12 +36,19 @@ class Summariser:
     def findTopSentences(self,sentLengths,sentences):
         sortedIdx=np.argsort(sentLengths)
         top3Idx=sortedIdx[-3:]
-        top3Sentences=[sentences[i] for i in top3Indx]
+        top3Sentences=[sentences[i] for i in top3Idx]
         return top3Sentences
     
+    def preprocess(self,text):
+        preprocessObj = PreprocessDoc()
+        #filteredText=preprocessObj.removeSplChar(text)
+        filteredText=preprocessObj.convertToLower(text)
+        return filteredText
+        
     def findSummary(self):
         filePath=self.config['data_path']['train_data']
         text = self.loadDocs(filePath)
+        text=self.preprocess(text)
         sentences=self.splitSentences(text)
         firstSent,restOfSent=self.groupSentences(sentences)
         sentLengths=self.findSentLengthArray(restOfSent)
@@ -49,4 +57,5 @@ class Summariser:
         summary = ' '.join(allSentences)
         return summary
        
-summariserObj=Summariser()   
+#summariserObj=Summariser()   
+#summary=summariserObj.findSummary()
